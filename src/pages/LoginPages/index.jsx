@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { AuthContext } from "../../contexts/auth";
+
 import "./styles.css";
 
 const LoginPage = () => {
+    const { authenticated, login } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submit",{email, password});
+        console.log("submit", { email, password });
+        
+        login(email, password); //integração com o meu contexto / api
     };
 
     return (
         <div id="login">
             <h1 className="title">Login do sistema</h1>
+            <p1>{ String(authenticated)}</p1>
             <form className="form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label htmlFor="email">Email</label>
